@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -7,7 +8,110 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Gallery  */
+.gallery {
+
+  background-color: red;
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* Product Formatting */
+
+.product {
+  border: 1px solid #c2bebe;
+  border-radius: 10px;
+  background-color: #f6f4f4;
+  width: 22%;
+  float: left;
+  margin: 2% .4% 0% .4%;
+  padding: 1%;
+}
+
+.content {
+  text-align: center;
+}
+
+/* Header  */
+
+.info {
+  font-weight: bold;
+  padding-top: 3%;
+  width: 88%;
+  margin: 0 auto;
+  font-size: 30px;
+  border-bottom: 1px solid #000;
+
+}
+
+.slang {
+  width: 70%;
+  display: inline-block;
+}
+.delete-checkbox {
+  width: 20px;
+}
+
+.btn {
+  text-transform: uppercase;
+  height: 100%;
+  border-radius: 5px;
+  width: 35%;
+  margin: 0 0% 3% 3%;
+  padding: 10px;
+  border: none;
+  font-size: 20px;
+  color: #FFF;
+}
+
+
+
+.add-btn {
+  background-color: #007bff;
+}
+
+.add-btn:hover {
+  border: 2px solid #007bff;
+  color: #007bff;
+  font-weight: bold;
+  background-color: #FFF;
+}
+
+.del-btn {
+  background-color: #dc3545;
+}
+
+.del-btn:hover {
+  border: 2px solid #dc3545;
+  color: #dc3545;
+  font-weight: bold;
+  background-color: #FFF;
+}
+
+.btns {
+  text-align: right;
+  display: inline-block;
+  width: 30%;
+}
+
+/* New Product */
+
+.new-product{
+  
+width: 86%;
+margin: 0 auto;
+border-radius: 5px;
+background-color: #f2f2f2;
+padding: 20px;
+
+}
+
+input[type=text],input[type=number], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
