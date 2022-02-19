@@ -34,7 +34,7 @@ handleSwitcher =
 
         return (
                 <Fragment>
-                    <label>Size</label>
+                    <label>Size (MB)</label>
                     <input type = 'number' id='size' value={size} onChange={this.handleSizeChange} />
                     <h3>Please, provide size in MB.</h3>
                 </Fragment>
@@ -44,7 +44,7 @@ handleSwitcher =
 
             return (
                 <Fragment>
-                    <label>Weight</label>
+                    <label>Weight (KG)</label>
                     <input type = 'number' id='weight' value={weight} onChange={this.handleWeightChange}/>
                     <h3>Please, provide weight in Kg.</h3>
                 </Fragment>
@@ -54,21 +54,58 @@ handleSwitcher =
         return (
             <Fragment>
 
-                <label>Height</label>
+                <label>Height (CM)</label>
                 <input type = 'number' id='height' value={height} onChange={this.handleHeightChange} />
                 
-                <label>Width</label>
+                <label>Width (CM)</label>
                 <input type = 'number' id='width' value={width} onChange={this.handleWidthChange} />
 
-                <label>Length</label>
+                <label>Length (CM)</label>
                 <input type = 'number' id='lenght' value={length} onChange={this.handleLengthChange}/>
 
-                <h3>Please, provide dimensions.</h3>
+                <h3>Please, provide dimensions in (CM).</h3>
             </Fragment>
             );
         default:
             return '';          
     }
+}
+
+validateData = (data) => {
+    const {
+        sku,
+        name,
+        price,
+        productType,
+        size,
+        weight,
+        height,
+        width,
+        length
+    } = data
+    
+    if(sku === '' || name === '' || price <= 0 ) {
+        return false;
+    }
+    else if (productType == ''  || productType == 'none') {
+        return false;
+    } 
+    else if (productType == 'DVD' && (size === 0 || size === '')) {
+        return false;
+    }
+    else if (productType == 'BOOK' && (weight === 0 || weight === '')) {
+        return false;
+    }
+    else if (productType == 'Furniture' && (height === 0 || height === '')) {
+        return false;
+    }
+    else if (productType == 'Furniture' && (width === 0 || width === '')) {
+        return false;
+    }
+    else if (productType == 'Furniture' && (length === 0 || length === '')) {
+        return false;
+    }
+    return true;
 }
 
 handleSizeChange = (e) => {
@@ -131,6 +168,9 @@ handleSelectchanges = (e)=>{
         }))
 }
 
+pingUI = () => {
+
+}
 handleSubmit = (e) => {
     e.preventDefault()
     const {dispatch} = this.props
@@ -146,8 +186,20 @@ handleSubmit = (e) => {
         length,
     } = this.state
 
-    // if(sku.length===0 || name.length===0||price===0||productType===''||)
-
+    if(!this.validateData({
+        sku,
+        name,
+        price,
+        productType,
+        size,
+        weight,
+        height,
+        width,
+        length
+    })) {
+        this.setState({errorr:true})
+        return;
+    }
     dispatch(asyncHandleNewProduct({
             sku,
             name,
@@ -170,7 +222,8 @@ handleSubmit = (e) => {
         height:'',
         width:'',
         length:'',
-        toHome:sku ? true:false 
+        toHome:sku ? true:false,
+        errorr:false,
       }));
 
 }
@@ -178,7 +231,7 @@ render() {
 
     const {sku,
     name,
-    price,toHome} = this.state
+    price,toHome,errorr} = this.state
 
     if(toHome){
         return <Navigate to='/'/>
@@ -186,7 +239,6 @@ render() {
 
     return (
     <Fragment>
-
     <LoadingBar   style={{ backgroundColor: 'blue', height: '5px' }}/>
     <div>
         <div className='info'>
@@ -201,10 +253,11 @@ render() {
             </Link>
             </div>
         </div>
-
-
         <div className='new-product'>
         
+        {
+            errorr && <div className='danger'>Please, submit required data</div>
+        }    
         <form onSubmit={this.handleSubmit} id="product_form">
             <span className='login-input'>
             <label>SKU</label>
@@ -218,7 +271,7 @@ render() {
             </span>
 
             <span className='login-input'>
-            <label>Price</label>
+            <label>Price ($)</label>
             <input type = 'number' id='price' name='price' value={price} onChange={this.handlePriceChange}/>
             </span>
             
