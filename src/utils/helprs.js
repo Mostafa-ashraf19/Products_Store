@@ -6,7 +6,7 @@ function formatSpecs(specs) {
 export function formattingReceivedProduct(rawproducts) {
   let products = {};
 
-  rawproducts.map((product) => {
+  rawproducts.forEach((product) => {
     const {id, sku, name, price, type, specs} = {...product};
 
     let specsformated = formatSpecs(specs);

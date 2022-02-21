@@ -72,39 +72,39 @@ handleSwitcher =
 }
 
 validateData = (data) => {
-    const {
-        sku,
-        name,
-        price,
-        productType,
-        size,
-        weight,
-        height,
-        width,
-        length
-    } = data
+    // const {
+    //     sku,
+    //     name,
+    //     price,
+    //     productType,
+    //     size,
+    //     weight,
+    //     height,
+    //     width,
+    //     length
+    // } = data
     
     return true;
-    if(sku === '' || name === '' || price <= 0 ) {
-        return false;
-    }
-    else if (productType === ''  || productType === 'none') {
-        return false;
-    } 
-    else if (productType === 'DVD' && (size === 0 || size === '')) {
-        return false;
-    }
-    else if (productType === 'BOOK' && (weight === 0 || weight === '')) {
-        return false;
-    }
-    else if (productType === 'Furniture' && 
-    (height === 0 || height === '') || 
-    (width === 0 || width === '') ||
-     (length === 0 || length === '') ) {
-        return false;
-    }
+    // if(sku === '' || name === '' || price <= 0 ) {
+    //     return false;
+    // }
+    // else if (productType === ''  || productType === 'none') {
+    //     return false;
+    // } 
+    // else if (productType === 'DVD' && (size === 0 || size === '')) {
+    //     return false;
+    // }
+    // else if (productType === 'BOOK' && (weight === 0 || weight === '')) {
+    //     return false;
+    // }
+    // else if (productType === 'Furniture' && 
+    // (height === 0 || height === '') || 
+    // (width === 0 || width === '') ||
+    //  (length === 0 || length === '') ) {
+    //     return false;
+    // }
     
-    return true;
+    // return true;
 }
 
 handleSizeChange = (e) => {
