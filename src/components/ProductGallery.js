@@ -44,7 +44,8 @@ render() {
                     <div className='info'>
                         <div className='slang'>Products List</div>
                         <div className='btns'>
-                        <Link to='/add-product' ><button className='btn add-btn'>ADD</button></Link>
+                        {/* <Link to='/add-product' ><button className='btn add-btn'>ADD</button></Link> */}
+                        <button className='btn add-btn'>ADD</button>
                             <button 
                             id='delete-product-btn'
                             className='btn del-btn'
