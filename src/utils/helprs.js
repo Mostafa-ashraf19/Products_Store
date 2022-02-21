@@ -6,6 +6,9 @@ function formatSpecs(specs) {
 export function formattingReceivedProduct(rawproducts) {
   let products = {};
 
+  if (rawproducts === undefined) {
+    return {}
+  }
   rawproducts.forEach((product) => {
     const {id, sku, name, price, type, specs} = {...product};
 

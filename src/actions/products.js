@@ -1,7 +1,7 @@
 import {hideLoading, showLoading} from 'react-redux-loading-bar'
 import {formatNewProduct} from '../utils/helprs'
 
-import {_saveProduct, RemoveProduct} from '../utils/_DATA'
+import {_saveProduct, RemoveProducts} from '../utils/_DATA'
 
 
 export const ADD_PRODUCT = 'ADD_PRODUCT'
@@ -15,6 +15,11 @@ export function _addProduct(product) {
   }
 }
 
+function removeProducts(skus,ids,dispatch) {
+  skus.forEach((sku,index)=>{
+    dispatch(_removeProduct(sku,ids[index]));
+  });
+}
 export function _removeProduct(sku,id) {
   return {
     type: REMOVE_PRODUCT, sku,id
@@ -28,13 +33,14 @@ export function _getProucts(products) {
 }
 
 // Async Action Creators.
-export function asyncHandleDeleteProduct(sku,id) {
+export function asyncHandleDeleteProducts(skus,ids) {
   return (dispatch) => {
     dispatch(showLoading());
    
-    RemoveProduct(sku).then((ev) => {
+    RemoveProducts(skus).then((ev) => {
       console.log('remove done', ev)
-        dispatch(_removeProduct(sku,id));
+        // dispatch(_removeProduct(skus,ids));
+        removeProducts(skus,ids,dispatch);
         dispatch(hideLoading());
       }).catch((e)=> {
         console.log('error. ', e)

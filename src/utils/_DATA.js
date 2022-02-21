@@ -14,7 +14,7 @@ export const getInitialProducts =
   return axios.get(GET_PRODUCTS_URL);
 }
 
-export const RemoveProduct =
+export const RemoveProducts =
   //   async (sku) => {
   // return axios({
   //   method: 'DELETE',
@@ -23,12 +23,12 @@ export const RemoveProduct =
   //   data: {sku}
   // });
 
-  async (sku) => {
+  async (skus) => {
     return axios({
-      method: 'GET',
+      method: 'DELETE',
       url: REMOVE_PRODUCT_URL,
       headers: {'Content-Type': 'application/json'},
-      data: {sku}
+      data: {skus:skus}
     });
 
   // async (sku) => {

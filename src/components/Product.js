@@ -4,12 +4,8 @@ import {connect} from 'react-redux';
 class Product extends Component {
   handleDelete = (e, sku, id) => {
     const checked = e.target.checked;
-    this.setState({checked: checked});
-    if (checked) {
-      this.props.handleChecked(sku,id)
-    } else {
-      this.props.handleChecked('','')
-    }
+    this.setState({checked: checked},
+       ()=> this.props.handleChecked(sku,id,checked));
   };
   state = {
     checked: false,

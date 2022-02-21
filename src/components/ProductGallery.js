@@ -2,45 +2,60 @@ import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import ProductsList from './ProductsList'
 import { Link} from 'react-router-dom';
-import {asyncHandleDeleteProduct} from '../actions/products'
+import {asyncHandleDeleteProducts} from '../actions/products'
 import LoadingBar from 'react-redux-loading-bar'
 
 class Gallery extends Component {
 state = {
-    sku: '',
-    id: ''
+    skus: [],
+    ids: []
 }
-handleChecked  = (sku,id) => {
-this.setState({sku:sku,id:id});
+handleChecked  = (sku,id,checked) => {
+this.setState((currentstate)=>{
+    let {skus,ids} = currentstate;
+    if(checked) {
+        skus.push(sku)
+        ids.push(id)
+    }
+    else{
+        skus =  skus.filter((s) => s!==sku)
+        ids = ids.filter((i) => i !== id)
+    }
+    console.log('skus new is: ', skus)
+    console.log('ids new is: ', ids)
+
+    return {skus,ids}
+});
 
 }
 handleDeleteclick = (e) => {
-    const {sku,id} = this.state
+    const {skus,ids} = this.state
     const {dispatch} = this.props
-
-    if (sku.length !== 0) {
-        dispatch(asyncHandleDeleteProduct(sku,id));
-    }
+    dispatch(asyncHandleDeleteProducts(skus,ids));
 }
 render() {
-    const {sku} = this.state
+    const {skus} = this.state
+    const {loadding,keys_len}  = this.props
     return (
         <Fragment>
         <LoadingBar   style={{ backgroundColor: 'blue', height: '5px' }}/>
             {
-                this.props.loadding === true? '':
+                loadding !== true && 
                 <Fragment>
                     <div className='info'>
                         <div className='slang'>Products List</div>
                         <div className='btns'>
                         <Link to='/add-product' >
-                            <button className='btn add-btn'>Add</button> 
+                            <button className='btn add-btn'>ADD</button> 
                         </Link>
-                        <button 
-                        id='delete-product-btn'
-                        className='btn del-btn' 
-                        disabled = {sku === ''} 
-                        onClick={this.handleDeleteclick}>Mass Delete</button>
+                        {
+                           keys_len ? '' : 
+                            <button 
+                            id='delete-product-btn'
+                            className='btn del-btn' 
+                            disabled = {skus.length === 0} 
+                            onClick={this.handleDeleteclick}>MASS DELETE</button>
+                        }
                         </div>
                     </div>
 
@@ -55,8 +70,11 @@ render() {
 }
 
 function mapsStateToProps(state) {
+    const {loadingBar} = state;
+    
     return {
-      loadding: Object.keys(state.products).length === 0 
+      loadding: loadingBar.default === 1,
+      keys_len:  Object.keys(state.products).length === 0
     }
   }
 
