@@ -71,7 +71,7 @@ render() {
 
 function mapsStateToProps(state) {
     const {loadingBar} = state;
-    
+
     return {
       loadding: loadingBar.default === 1,
       keys_len:  Object.keys(state.products).length === 0

@@ -31,7 +31,7 @@ class Product extends Component {
     return (
         <div className = 'product'>
 
-        <input className='delete-checkbox' type = 'checkbox' checked = {checked} onChange =
+        <input type = 'checkbox' className='delete-checkbox' checked = {checked} onChange =
          {
            (e) => this.handleDelete(e, product.sku, product.id)
          } />

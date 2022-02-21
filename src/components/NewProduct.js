@@ -61,7 +61,7 @@ handleSwitcher =
                 <input type = 'number' id='width' value={width} onChange={this.handleWidthChange} />
 
                 <label>Length (CM)</label>
-                <input type = 'number' id='lenght' value={length} onChange={this.handleLengthChange}/>
+                <input type = 'number' id='length' value={length} onChange={this.handleLengthChange}/>
 
                 <h3>Please, provide dimensions in (CM).</h3>
             </Fragment>
@@ -243,9 +243,9 @@ render() {
                 <button 
                 className = 'btn add-btn' 
                 form="product_form"
-                type='submit'>SAVE</button> 
+                type='submit'>Save</button> 
             <Link to = '/'>
-            <button className ='btn del-btn' >CANCEL</button>
+            <button className ='btn del-btn' >Cancel</button>
             </Link>
             </div>
         </div>
