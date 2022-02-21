@@ -35,7 +35,7 @@ handleDeleteclick = (e) => {
 }
 render() {
     const {skus} = this.state
-    const {loadding,keys_len}  = this.props
+    const {loadding}  = this.props
     return (
         <Fragment>
         <LoadingBar   style={{ backgroundColor: 'blue', height: '5px' }}/>
@@ -72,7 +72,7 @@ function mapsStateToProps(state) {
 
     return {
       loadding: loadingBar.default === 1,
-      keys_len:  Object.keys(state.products).length === 0
+    //   keys_len:  Object.keys(state.products).length === 0
     }
   }
 
