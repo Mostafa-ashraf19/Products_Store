@@ -46,12 +46,11 @@ render() {
                         <div className='slang'>Products List</div>
                         <div className='btns'>
                         <Link to='/add-product' >
-                            <button className='btn add-btn'>ADDz</button> 
+                            <button className='btn add-btn'>ADD</button> 
                         </Link>
                             <button 
                             id='delete-product-btn'
-                            className='btn del-btn' 
-                            disabled = {skus.length === 0} 
+                            className='btn del-btn'
                             onClick={this.handleDeleteclick}>MASS DELETE</button>
                         
                         </div>
