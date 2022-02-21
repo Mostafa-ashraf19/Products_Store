@@ -1,6 +1,8 @@
 import {hideLoading, showLoading} from 'react-redux-loading-bar'
+import {formatNewProduct} from '../utils/helprs'
 
 import {_saveProduct, RemoveProduct} from '../utils/_DATA'
+
 
 export const ADD_PRODUCT = 'ADD_PRODUCT'
 export const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
@@ -13,9 +15,9 @@ export function _addProduct(product) {
   }
 }
 
-export function _removeProduct(sku) {
+export function _removeProduct(sku,id) {
   return {
-    type: REMOVE_PRODUCT, sku,
+    type: REMOVE_PRODUCT, sku,id
   }
 }
 
@@ -26,23 +28,27 @@ export function _getProucts(products) {
 }
 
 // Async Action Creators.
-export function asyncHandleDeleteProduct(sku) {
+export function asyncHandleDeleteProduct(sku,id) {
   return (dispatch) => {
     dispatch(showLoading());
-    RemoveProduct(sku).then((e) => {
-      dispatch(_removeProduct(sku));
-      dispatch(hideLoading());
-    })
+   
+    RemoveProduct(sku).then((ev) => {
+      console.log('remove done', ev)
+        dispatch(_removeProduct(sku,id));
+        dispatch(hideLoading());
+      }).catch((e)=> {
+        console.log('error. ', e)
+      })
   }
 }
 
 export function asyncHandleNewProduct(product) {
   return (dispatch) => {
+
     dispatch(showLoading());
     _saveProduct(product)
-        .then((product) => {
-          dispatch(_addProduct(product));
-          console.log('Hi from new product', product)
+        .then(({data}) => {
+          dispatch(_addProduct(formatNewProduct(data.product)));
         })
         .then(() => {
           dispatch(hideLoading());

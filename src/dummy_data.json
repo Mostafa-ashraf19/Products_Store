@@ -1,0 +1,85 @@
+[
+    {
+        "sku": "JVC200456",
+        "name": "Acme DISC",
+        "price": 20,
+        "type": "DVD'",
+        "typeSpecs": "10"
+    },
+    {
+        "sku": "JVC200123",
+        "name": "Acme DISC",
+        "price": 20,
+        "type": "DVD",
+        "typeSpecs": "10"
+    },
+    {
+        "sku": "JVC200789",
+        "name": "World War I",
+        "price": 20,
+        "type": "BOOK",
+        "typeSpecs": "10"
+    },
+    {
+        "sku": "JVC200987",
+        "name": "World War II",
+        "price": 20,
+        "type": "BOOK",
+        "typeSpecs": "10"
+    },
+    {
+        "sku": "JVC200654",
+        "name": "Couch",
+        "price": 200,
+        "type": "Furniture",
+        "typeSpecs": {
+            "H": 150,
+            "W": 70,
+            "L": 45
+        }
+    },
+    {
+        "sku": "JVC200321",
+        "name": "Bed",
+        "price": 120,
+        "type": "Furniture",
+        "typeSpecs": {
+            "H": 150,
+            "W": 70,
+            "L": 45
+        }
+    },
+    {
+        "sku": "JVC200322",
+        "name": "Bed",
+        "price": 120,
+        "type": "Furniture",
+        "typeSpecs": {
+            "H": 150,
+            "W": 70,
+            "L": 45
+        }
+    },
+    {
+        "sku": "JVC200323",
+        "name": "Bed",
+        "price": 120,
+        "type": "Furniture",
+        "typeSpecs": {
+            "H": 150,
+            "W": 70,
+            "L": 45
+        }
+    },
+    {
+        "sku": "JVC200324",
+        "name": "Bed",
+        "price": 120,
+        "type": "Furniture",
+        "typeSpecs": {
+            "H": 150,
+            "W": 70,
+            "L": 45
+        }
+    }
+]

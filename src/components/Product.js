@@ -2,13 +2,13 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux';
 
 class Product extends Component {
-  handleDelete = (e, sku) => {
+  handleDelete = (e, sku, id) => {
     const checked = e.target.checked;
     this.setState({checked: checked});
     if (checked) {
-      this.props.handleChecked(sku)
+      this.props.handleChecked(sku,id)
     } else {
-      this.props.handleChecked('')
+      this.props.handleChecked('','')
     }
   };
   state = {
@@ -37,7 +37,7 @@ class Product extends Component {
 
         <input className='delete-checkbox' type = 'checkbox' checked = {checked} onChange =
          {
-           (e) => this.handleDelete(e, product.sku)
+           (e) => this.handleDelete(e, product.sku, product.id)
          } />
                 
         <div className='content'>

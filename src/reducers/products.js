@@ -10,9 +10,7 @@ export default function products(state = {}, action) {
       return {...state, ...action.products};
 
     case REMOVE_PRODUCT:
-    //   console.log('remove reducers', state);
-    //   console.log('remove reducers actions', action);
-      delete state[action.sku]  
+      delete state[action.id]  
       return {
         ...state
       };

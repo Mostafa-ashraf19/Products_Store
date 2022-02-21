@@ -84,27 +84,26 @@ validateData = (data) => {
         length
     } = data
     
+    return true;
     if(sku === '' || name === '' || price <= 0 ) {
         return false;
     }
-    else if (productType == ''  || productType == 'none') {
+    else if (productType === ''  || productType === 'none') {
         return false;
     } 
-    else if (productType == 'DVD' && (size === 0 || size === '')) {
+    else if (productType === 'DVD' && (size === 0 || size === '')) {
         return false;
     }
-    else if (productType == 'BOOK' && (weight === 0 || weight === '')) {
+    else if (productType === 'BOOK' && (weight === 0 || weight === '')) {
         return false;
     }
-    else if (productType == 'Furniture' && (height === 0 || height === '')) {
+    else if (productType === 'Furniture' && 
+    (height === 0 || height === '') || 
+    (width === 0 || width === '') ||
+     (length === 0 || length === '') ) {
         return false;
     }
-    else if (productType == 'Furniture' && (width === 0 || width === '')) {
-        return false;
-    }
-    else if (productType == 'Furniture' && (length === 0 || length === '')) {
-        return false;
-    }
+    
     return true;
 }
 
@@ -168,9 +167,6 @@ handleSelectchanges = (e)=>{
         }))
 }
 
-pingUI = () => {
-
-}
 handleSubmit = (e) => {
     e.preventDefault()
     const {dispatch} = this.props
