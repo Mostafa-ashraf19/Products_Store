@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import ProductsList from './ProductsList'
-import { Link} from 'react-router-dom';
+// import { Link} from 'react-router-dom';
 import {asyncHandleDeleteProducts} from '../actions/products'
 import LoadingBar from 'react-redux-loading-bar'
 
