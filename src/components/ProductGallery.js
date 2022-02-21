@@ -34,7 +34,6 @@ handleDeleteclick = (e) => {
     dispatch(asyncHandleDeleteProducts(skus,ids));
 }
 render() {
-    const {skus} = this.state
     const {loadding}  = this.props
     return (
         <Fragment>
