@@ -15,30 +15,10 @@ export const getInitialProducts =
 }
 
 export const RemoveProducts =
-  //   async (sku) => {
-  // return axios({
-  //   method: 'DELETE',
-  //   url: REMOVE_PRODUCT_URL,
-  //   headers: {'Content-Type': 'application/json'},
-  //   data: {sku}
-  // });
+    async (skus) => {
 
-  async (skus) => {
-    return axios({
-      method: 'DELETE',
-      url: REMOVE_PRODUCT_URL,
-      headers: {'Content-Type': 'application/json'},
-      data: {skus:skus}
-    });
+  return axios.get(REMOVE_PRODUCT_URL,{params: {skus:skus}});
 
-  // async (sku) => {
-  //   return fetch(REMOVE_PRODUCT_URL,{
-  //   method: 'DELETE',
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   },
-  //   body: JSON.stringify({sku})
-  //   })
 }
 
 export function _saveProduct(product) {
@@ -48,14 +28,7 @@ export function _saveProduct(product) {
   let specs = type === 'Furniture' ? `${height},${width},${length}` :
                                      type === 'DVD' ? `${size}` : `${weight}`;
 
-  return axios({
-    method: 'POST',
-    url: ADD_NEW_PRODUCT_URL,
-    headers: {
-    'Content-Type': 'application/json',
-  },
-    data: {sku, name, price, type, specs}
-  });
+  return axios.get(ADD_NEW_PRODUCT_URL,{params: {sku, name, price, type, specs}});
 }
 
 
@@ -67,6 +40,8 @@ http://localhost/store-test-assignment-backend/apis/create.php
 
 
 INSERT INTO `products`(`sku`, `name`, `price`, `type`, `specs`) VALUES ("JVC166123","Word war I",55,"BOOK","20");
+
+$product->create($sku, $name, $price, $type, $specs)
 
 */
 
