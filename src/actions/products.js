@@ -38,7 +38,6 @@ export function asyncHandleDeleteProducts(skus,ids) {
     dispatch(showLoading());
    
     RemoveProducts(skus).then((ev) => {
-      console.log('remove done', ev)
         dispatch(_removeProduct(skus,ids));
         removeProducts(skus,ids,dispatch);
         dispatch(hideLoading());
