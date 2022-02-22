@@ -1,4 +1,4 @@
-# Scandiweb assignment -  Products Store
+# Products Store
 
 React and Redux web app UI that lets a user add products or massive deleting for products.
 
