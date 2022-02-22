@@ -18,11 +18,11 @@ To get started:
 
 1. **Main Page** 
    
-   <img src="" alt='Main'/>
+   <img src="https://raw.githubusercontent.com/Mostafa-ashraf19/Scandiweb-Fullstack-Assignment/main/screenshots/mainpage.png" alt='Main'/>
       
 2. **Add Product**
 
-   <img src="" alt='Add' /> 
+   <img src="https://raw.githubusercontent.com/Mostafa-ashraf19/Scandiweb-Fullstack-Assignment/main/screenshots/addproduct.png" alt='Add' /> 
 
 
 ## Data
