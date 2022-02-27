@@ -15,9 +15,9 @@ export function _addProduct(product) {
   }
 }
 
-function removeProducts(skus,ids,dispatch) {
-  skus.forEach((sku,index)=>{
-    dispatch(_removeProduct(sku,ids[index]));
+function removeProducts(products,dispatch) {
+  products.forEach((product)=>{
+    dispatch(_removeProduct(product.sku,product.id));
   });
 }
 export function _removeProduct(sku,id) {
@@ -33,13 +33,14 @@ export function _getProucts(products) {
 }
 
 // Async Action Creators.
-export function asyncHandleDeleteProducts(skus,ids) {
+export function asyncHandleDeleteProducts(products) {
   return (dispatch) => {
     dispatch(showLoading());
-   
-    RemoveProducts(skus).then((ev) => {
-        dispatch(_removeProduct(skus,ids));
-        removeProducts(skus,ids,dispatch);
+  
+    let targets = products.map((product)=> `${product.sku}&${product.type}`)
+    RemoveProducts(targets).then((ev) => {
+      
+        removeProducts(products,dispatch);
         dispatch(hideLoading());
       }).catch((e)=> {
         console.log('error. ', e)
