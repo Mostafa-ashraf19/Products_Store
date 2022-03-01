@@ -271,7 +271,7 @@ render() {
             
             <span className='login-input'>
             <label>Type Switcher</label>
-            <select id='type' name='type' onChange={this.handleSelectchanges}>
+            <select id='productType' name='type' onChange={this.handleSelectchanges}>
                 <option value={NONE} >Type Switcher</option>
                 <option value={DVD}>DVD-disc</option>
                 <option value={BOOK}>Book</option>
