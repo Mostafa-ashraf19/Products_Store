@@ -1,25 +1,29 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux';
 
+import {Furniture, BOOK, DVD} from '../utils/available_products';
+
 class Product extends Component {
-  handleDelete = (e, product) => {
-    const checked = e.target.checked;
-    this.setState({checked: checked},
-       ()=> this.props.handleChecked(product,checked));
-  };
+
   state = {
     checked: false,
+  };
+  
+  handleDelete = (e, sku,id) => {
+    const checked = e.target.checked;
+    this.setState({checked: checked},
+       ()=> this.props.handleChecked(sku,id,checked));
   };
 
   formatProductSpecs = (product) => {
     switch (product.type) {
-      case 'DVD':
-        return `Size: ${product.typeSpecs}MB`;
-      case 'BOOK':
-        return `Weight: ${product.typeSpecs}KG`;
-      case 'Furniture':
+      case Furniture:
         const {H, W, L} = product.typeSpecs;
         return `Dimension: ${H}x${W}x${L}`;
+      case BOOK:
+        return `Weight: ${product.typeSpecs}KG`;
+      case DVD:
+        return `Size: ${product.typeSpecs}MB`;
       default:
         return '';  
     }
@@ -33,7 +37,7 @@ class Product extends Component {
 
         <input type = 'checkbox' className='delete-checkbox' checked = {checked} onChange =
          {
-           (e) => this.handleDelete(e, product)
+           (e) => this.handleDelete(e, product.sku,product.id)
          } />
                 
         <div className='content'>

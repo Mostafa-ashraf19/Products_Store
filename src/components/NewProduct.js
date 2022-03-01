@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {asyncHandleNewProduct} from '../actions/products'
 import LoadingBar from 'react-redux-loading-bar'
 
+import {NONE, Furniture, BOOK, DVD} from '../utils/available_products'
 
 class NewProduct extends Component {
 
@@ -11,7 +12,7 @@ state = {
     sku:'',
     name:'',
     price:'',
-    productType:'',
+    type:'',
     size:'',
     weight:'',
     height:'',
@@ -30,38 +31,38 @@ handleSwitcher =
             length} = this.state
 
     switch (type) {
-        case 'DVD':
+        case DVD:
 
         return (
                 <Fragment>
                     <label>Size (MB)</label>
-                    <input type = 'number' id='size' value={size} onChange={this.handleSizeChange} />
+                    <input type = 'number' min='0' id='size' value={size} onChange={this.handleSizeChange} />
                     <h3>Please, provide size in MB.</h3>
                 </Fragment>
             );
 
-        case 'BOOK':
+        case BOOK:
 
             return (
                 <Fragment>
                     <label>Weight (KG)</label>
-                    <input type = 'number' id='weight' value={weight} onChange={this.handleWeightChange}/>
+                    <input type = 'number' min='0' id='weight' value={weight} onChange={this.handleWeightChange}/>
                     <h3>Please, provide weight in Kg.</h3>
                 </Fragment>
             );
 
-        case 'Furniture':
+        case Furniture:
         return (
             <Fragment>
 
                 <label>Height (CM)</label>
-                <input type = 'number' id='height' value={height} onChange={this.handleHeightChange} />
+                <input type = 'number' min='0' id='height' value={height} onChange={this.handleHeightChange} />
                 
                 <label>Width (CM)</label>
-                <input type = 'number' id='width' value={width} onChange={this.handleWidthChange} />
+                <input type = 'number' min='0' id='width' value={width} onChange={this.handleWidthChange} />
 
                 <label>Length (CM)</label>
-                <input type = 'number' id='length' value={length} onChange={this.handleLengthChange}/>
+                <input type = 'number' min='0' id='length' value={length} onChange={this.handleLengthChange}/>
 
                 <h3>Please, provide dimensions in (CM).</h3>
             </Fragment>
@@ -72,39 +73,35 @@ handleSwitcher =
 }
 
 validateData = (data) => {
-    // const {
-    //     sku,
-    //     name,
-    //     price,
-    //     productType,
-    //     size,
-    //     weight,
-    //     height,
-    //     width,
-    //     length
-    // } = data
+    const {
+        sku,
+        name,
+        price,
+        type,
+        size,
+        weight,
+        height,
+        width,
+        length
+    } = data
     
-    return true;
-    // if(sku === '' || name === '' || price <= 0 ) {
-    //     return false;
-    // }
-    // else if (productType === ''  || productType === 'none') {
-    //     return false;
-    // } 
-    // else if (productType === 'DVD' && (size === 0 || size === '')) {
-    //     return false;
-    // }
-    // else if (productType === 'BOOK' && (weight === 0 || weight === '')) {
-    //     return false;
-    // }
-    // else if (productType === 'Furniture' && 
-    // (height === 0 || height === '') || 
-    // (width === 0 || width === '') ||
-    //  (length === 0 || length === '') ) {
-    //     return false;
-    // }
-    
-    // return true;
+    if (!(sku.length > 0 && name.length > 0 && parseInt(price) > 0)) {
+        return false;
+    }
+
+    switch (type) {
+        case DVD:
+            return parseInt(size) > 0;
+
+        case BOOK:
+            return parseInt(weight) > 0;
+   
+        case Furniture:
+            return parseInt(height) > 0 && parseInt(width) > 0 && parseInt(length) > 0;
+
+        default:
+            return false;
+    }
 }
 
 handleSizeChange = (e) => {
@@ -157,7 +154,7 @@ handlePriceChange = (e) => {
 
 handleSelectchanges = (e)=>{
     const value = e.target.value;
-    this.setState({productType:value},
+    this.setState({type:value},
         ()=>this.setState({
             size:'',
             weight:'',
@@ -174,7 +171,7 @@ handleSubmit = (e) => {
         sku,
         name,
         price,
-        productType,
+        type,
         size,
         weight,
         height,
@@ -186,21 +183,22 @@ handleSubmit = (e) => {
         sku,
         name,
         price,
-        productType,
+        type,
         size,
         weight,
         height,
         width,
         length
-    })) {
+    })){
         this.setState({errorr:true})
         return;
     }
+
     dispatch(asyncHandleNewProduct({
             sku,
             name,
             price,
-            type:productType,
+            type,
             size,
             weight,
             height,
@@ -212,7 +210,7 @@ handleSubmit = (e) => {
         sku:'',
         name:'',
         price:'',
-        productType:'',
+        type:'',
         size:'',
         weight:'',
         height:'',
@@ -252,7 +250,7 @@ render() {
         <div className='new-product'>
         
         {
-            errorr && <div className='danger'>Please, submit required data</div>
+            errorr && <div className='danger'>Please, Add Required Data.</div>
         }    
         <form onSubmit={this.handleSubmit} id="product_form">
             <span className='login-input'>
@@ -268,22 +266,22 @@ render() {
 
             <span className='login-input'>
             <label>Price ($)</label>
-            <input type = 'number' id='price' name='price' value={price} onChange={this.handlePriceChange}/>
+            <input type = 'number' min='0' id='price' name='price' value={price} onChange={this.handlePriceChange}/>
             </span>
             
             <span className='login-input'>
             <label>Type Switcher</label>
-            <select id='productType' name='type' onChange={this.handleSelectchanges}>
-                <option value='none'>Type Switcher</option>
-                <option value='DVD'>DVD-disc</option>
-                <option value='BOOK'>Book</option>
-                <option value='Furniture'>Furniture</option>
+            <select id='type' name='type' onChange={this.handleSelectchanges}>
+                <option value={NONE} >Type Switcher</option>
+                <option value={DVD}>DVD-disc</option>
+                <option value={BOOK}>Book</option>
+                <option value={Furniture}>Furniture</option>
             </select>
             </span>
 
             <span className='login-input'>
                 {
-                    this.handleSwitcher(this.state.productType)
+                    this.handleSwitcher(this.state.type)
                 }
             </span>
             

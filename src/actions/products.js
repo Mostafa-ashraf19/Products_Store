@@ -1,8 +1,7 @@
 import {hideLoading, showLoading} from 'react-redux-loading-bar'
-import {formatNewProduct} from '../utils/helprs'
 
 import {_saveProduct, RemoveProducts} from '../utils/_DATA'
-
+import {formatNewProduct, prepare_product} from '../utils/helprs'
 
 export const ADD_PRODUCT = 'ADD_PRODUCT'
 export const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
@@ -15,14 +14,15 @@ export function _addProduct(product) {
   }
 }
 
-function removeProducts(products,dispatch) {
-  products.forEach((product)=>{
-    dispatch(_removeProduct(product.sku,product.id));
+function removeProducts(ids, dispatch) {
+  ids.forEach((id) => {
+    dispatch(_removeProduct(id));
   });
-}
-export function _removeProduct(sku,id) {
+} 
+
+export function _removeProduct(id) {
   return {
-    type: REMOVE_PRODUCT, sku,id
+    type: REMOVE_PRODUCT, id
   }
 }
 
@@ -33,28 +33,27 @@ export function _getProucts(products) {
 }
 
 // Async Action Creators.
-export function asyncHandleDeleteProducts(products) {
+export function asyncHandleDeleteProducts(skus,ids) {
   return (dispatch) => {
     dispatch(showLoading());
-  
-    let targets = products.map((product)=> `${product.sku}&${product.type}`)
-    RemoveProducts(targets).then((ev) => {
-      
-        removeProducts(products,dispatch);
-        dispatch(hideLoading());
-      }).catch((e)=> {
-        console.log('error. ', e)
-      })
+    RemoveProducts(skus)
+        .then((ev) => {
+          console.log('ev', ev.data);
+          removeProducts(ids, dispatch);
+          dispatch(hideLoading());
+        })
+        .catch((e) => {console.log('error. ', e)})
   }
 }
 
 export function asyncHandleNewProduct(product) {
   return (dispatch) => {
-
     dispatch(showLoading());
-    _saveProduct(product)
+    _saveProduct(prepare_product(product))
         .then(({data}) => {
-          dispatch(_addProduct(formatNewProduct(data.product)));
+          if(data.status !== 400) {
+            dispatch(_addProduct(formatNewProduct(data.product)));
+          }
         })
         .then(() => {
           dispatch(hideLoading());

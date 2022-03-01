@@ -7,29 +7,34 @@ import LoadingBar from 'react-redux-loading-bar'
 
 class Gallery extends Component {
 state = {
-    products: [],
+    skus: [],
+    ids: [],
 }
-handleChecked  = (product,checked) => {
+handleChecked  = (sku,id,checked) => {
 this.setState((currentstate)=>{
-    let {products} = currentstate;
+    let {skus,ids} = currentstate;
     if(checked) {
-        products.push(product);
+        skus.push(sku);
+        ids.push(id);
     }
     else{
-        products =  products.filter((iter_product) => iter_product.sku !== product.sku)
+        skus =  skus.filter((iter_sku) => iter_sku !== sku)
+        ids =  ids.filter((iter_id) => iter_id !== id)
     }
    
-    console.log('products new is: ', products)
-
-    return {products}
+    console.log('ids ', ids);
+    console.log('skus ', skus);
+    
+    return {skus, ids}
 });
+}
 
-}
 handleDeleteclick = (e) => {
-    const {products} = this.state
+    const {skus,ids} = this.state
     const {dispatch} = this.props
-    dispatch(asyncHandleDeleteProducts(products));
+    dispatch(asyncHandleDeleteProducts(skus,ids));
 }
+
 render() {
     const {loadding}  = this.props
     return (
@@ -64,7 +69,6 @@ function mapsStateToProps(state) {
 
     return {
       loadding: loadingBar.default === 1,
-    //   keys_len:  Object.keys(state.products).length === 0
     }
   }
 

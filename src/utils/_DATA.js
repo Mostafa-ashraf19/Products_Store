@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 // const MAIN_URL = 'http://localhost/store-test-assignment-backend'
+
 const MAIN_URL =
 'https://assignment-scandiweb-mostafaashraf.000webhostapp.com'
 
@@ -16,16 +17,13 @@ export const getInitialProducts =
 }
 
 export const RemoveProducts =
-    async (targets) => {
-  return axios.get(REMOVE_PRODUCT_URL, {params: {targets}});
+    async (skus) => {
+      console.log('skus deleted are', skus);
+  return axios.get(REMOVE_PRODUCT_URL, {params: {skus:skus}});
 }
 
 export function _saveProduct(product) {
-  const {sku, name, price, type, length, width, height, weight, size} = product;
-
-  let specs = type === 'Furniture' ? `${height},${width},${length}` :
-                                     type === 'DVD' ? `${size}` : `${weight}`;
-
+  const {sku, name, price, type, specs} = product;
   return axios.get(
       ADD_NEW_PRODUCT_URL, {params: {sku, name, price, type, specs}});
 }

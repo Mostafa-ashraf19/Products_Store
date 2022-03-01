@@ -1,3 +1,5 @@
+import {BOOK, DVD, Furniture} from './available_products'
+
 function formatSpecs(specs) {
   return specs.includes(',') ? specs.split(',').map((val) => parseInt(val)) :
                                parseInt(specs);
@@ -43,3 +45,24 @@ export function formatNewProduct(product) {
 
 }
 
+export function prepare_product(product) {
+  const {sku, name, price, type, length, width, height, weight, size} = product;
+
+  let specs = ''
+  switch (type) {
+    case Furniture:
+      specs = `${height},${width},${length}`;
+      break;
+    case DVD:
+      specs = `${size}`;
+      break;
+    case BOOK:
+      specs = `${weight}`;
+      break;
+    default:
+      break;
+  }
+  return {
+    sku, name, price, type, specs
+  }
+}
