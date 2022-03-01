@@ -26,6 +26,10 @@ To get started:
 
    <img src="https://raw.githubusercontent.com/Mostafa-ashraf19/Scandiweb-Fullstack-Assignment/main/screenshots/addproduct.png" alt='Add' /> 
 
+3. **Add Product - Validation error**
+
+   <img src="https://raw.githubusercontent.com/Mostafa-ashraf19/Products_Store/main/screenshots/validation.png" alt='Add' /> 
+
 
 ## Data
 
